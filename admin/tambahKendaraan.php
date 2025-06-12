@@ -1,7 +1,6 @@
 <?php 
 require '../config.php';
 
-
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit;
@@ -9,9 +8,8 @@ if (!isset($_SESSION['user'])) {
 
 $user_id = $_SESSION['user']['id'];
 
-
 if (isset($_POST['submit'])) {
-    $hasil = simpanKendaraan($_POST, $_FILES);
+    $hasil = simpanKendaraan($_POST, $_FILES); // tetap menggunakan simpanKendaraan
 
     if ($hasil['success']) {
         echo "<script>alert('Data kendaraan berhasil disimpan!'); window.location='kendaraan.php';</script>";
@@ -20,7 +18,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$kategoriList = getKategori(); // misalnya berisi jenis kendaraan: Mobil, Motor, dll
+$kategoriList = getKategori();
 ?>
 
 <!DOCTYPE html>
@@ -73,23 +71,31 @@ $kategoriList = getKategori(); // misalnya berisi jenis kendaraan: Mobil, Motor,
     </div>
 
     <div class="mb-3">
-        <label for="gambar" class="form-label">Gambar</label>
+        <label for="gambar" class="form-label">Gambar Kendaraan</label>
         <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" required>
     </div>
 
+    
     <div class="mb-3">
         <label for="harga" class="form-label">Harga Jual</label>
         <input type="number" class="form-control" id="harga" name="harga" required>
     </div>
-
     <div class="mb-3">
+        <label for="bukti_transfer" class="form-label">Bukti Transfer</label>
+        <input type="file" class="form-control" id="bukti_transfer" name="bukti_transfer" accept="image/*" required>
+        <div class="form-text">Unggah bukti pembayaran dalam format JPG, JPEG, atau PNG.</div>
+    </div>
+    
+    <!-- <div class="mb-3">
         <label for="status" class="form-label">Status</label>
         <select name="status" id="status" class="form-select" required>
             <option value="1">Tersedia</option>
             <option value="0">Tidak Tersedia</option>
         </select>
-    </div>
-    <input type="hidden" name="user_id" value="<?= $user_id?>">
+    </div> -->
+
+    <input type="hidden" name="user_id" value="<?= $user_id ?>">
+
     <div class="d-flex justify-content-between">
         <a href="kendaraan.php" class="btn btn-secondary">Kembali</a>
         <button type="submit" name="submit" class="btn btn-primary">Simpan</button>

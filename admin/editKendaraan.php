@@ -22,6 +22,11 @@ if ($kendaraan['user_id'] != $_SESSION['user']['id']) {
 $kategoriList = getKategori();
 
 if (isset($_POST['submit'])) {
+    if($kendaraan['status'] == 3){
+        echo "<script>alert('Data yang ditolak tidak bisa diubah'); window.location='kendaraan.php';</script>";
+        return;
+    }
+
     $hasil = updateKendaraan($_GET['id'], $_POST, $_FILES, $kendaraan['gambar']);
 
     if ($hasil['success']) {
@@ -103,13 +108,17 @@ if (isset($_POST['submit'])) {
         <input type="number" class="form-control" id="harga" name="harga" value="<?= $kendaraan['harga'] ?>" required>
     </div>
 
+     <?php if($kendaraan['status'] != 0){?>
+    
     <div class="mb-3">
         <label for="status" class="form-label">Status</label>
         <select name="status" id="status" class="form-select" required>
             <option value="1" <?= $kendaraan['status'] == 1 ? 'selected' : '' ?>>Tersedia</option>
-            <option value="0" <?= $kendaraan['status'] == 0 ? 'selected' : '' ?>>Tidak Tersedia</option>
+            <option value="0" <?= $kendaraan['status'] == 2  ? 'selected' : '' ?>>Tidak Tersedia</option>
         </select>
     </div>
+     <?php }?>
+    
 
     <div class="d-flex justify-content-between">
         <a href="kendaraan.php" class="btn btn-secondary">Kembali</a>

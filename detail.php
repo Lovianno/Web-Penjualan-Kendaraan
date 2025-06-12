@@ -20,6 +20,7 @@ if (!$kendaraan) {
         </div>";
   exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -48,14 +49,14 @@ if (!$kendaraan) {
           <p><strong>Tahun:</strong> <?= htmlspecialchars($kendaraan['tahun']) ?></p>
           <p style="text-align: justify;"><strong>Deskripsi:</strong><br><?= nl2br(htmlspecialchars($kendaraan['deskripsi'])) ?></p>
           <p><strong>Harga Jual :</strong> Rp<?= number_format($kendaraan['harga'], 0, ',', '.'); ?></p>
-          <p><strong>Status:</strong> <span class=""><?= $kendaraan['status'] == 1 ? 'Tersedia' : 'Tidak Tersedia'; ?></span></p>
+          <p><strong>Pemilik:</strong> <?= htmlspecialchars($kendaraan['nama_user']) ?></p>
 
           <a href="catalog.php" class="btn btn-secondary mt-3">
             <i class="bi bi-arrow-left"></i> Kembali
           </a>
 
           <?php if ($kendaraan['status'] == 1) { ?>
-            <a href="https://wa.me/6285335599526?text=Halo,%20saya%20ingin%20merental%20kendaraan%20<?= urlencode($kendaraan['nama']) ?>"
+            <a href="https://wa.me/<?= getNoTeleponByKendaraanId($kendaraan['id']) ?>?text=Halo,%20saya%20ingin%20memesan%20kendaraan%20<?= urlencode($kendaraan['nama']) ?>"
               class="btn btn-success mt-3" target="_blank">
               <i class="bi bi-whatsapp"></i> Kontak Penjual
             </a>

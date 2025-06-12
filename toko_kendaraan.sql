@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2025 at 01:09 PM
+-- Generation Time: Jun 12, 2025 at 04:01 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -37,6 +37,7 @@ CREATE TABLE `kendaraan` (
   `deskripsi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `gambar` varchar(255) NOT NULL,
   `harga` bigint NOT NULL,
+  `bukti_transfer` varchar(255) DEFAULT NULL,
   `status` tinyint NOT NULL,
   `user_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -45,27 +46,28 @@ CREATE TABLE `kendaraan` (
 -- Dumping data for table `kendaraan`
 --
 
-INSERT INTO `kendaraan` (`id`, `nama`, `kategori`, `merek`, `tipe`, `tahun`, `deskripsi`, `gambar`, `harga`, `status`, `user_id`) VALUES
-(1, 'Avanza G', 'Mobil', 'Toyota', 'MPV', 2021, 'Mobil keluarga irit dan nyaman', '6830265731207.jpg', 210000000, 1, 2),
-(2, 'Beat Street', 'Motor', 'Honda', 'Skuter', 2022, 'Motor matic irit BBM dan lincah', '6830265fd05ca.jpg', 17000000, 1, 1),
-(3, 'Vario 160', 'Motor', 'Honda', 'Skuter', 2023, 'Desain sporty dan bertenaga', '683025034e589.jpg', 26500000, 1, 1),
-(4, 'Xpander Cross', 'Mobil', 'Mitsubishi', 'SUV', 2022, 'SUV keluarga tangguh dan nyaman', '683026b6b82e5.jpg', 310000000, 1, 1),
-(5, 'Fortuner VRZ', 'Mobil', 'Toyota', 'SUV', 2023, 'SUV premium dengan fitur lengkap', '68302692ada1f.jpg', 590000000, 1, 1),
-(6, 'Brio Satya', 'Mobil', 'Honda', 'Hatchback', 2021, 'Mobil kecil irit dan cocok di perkotaan', '6830266808e3f.jpg', 165000000, 1, 1),
-(7, 'Ninja 250', 'Motor', 'Kawasaki', 'Sport', 2022, 'Motor sport dengan performa tinggi', '683024d290b0a.jpg', 69000000, 1, 1),
-(8, 'Yaris GR', 'Mobil', 'Toyota', 'Hatchback', 2023, 'Mobil sporty dengan mesin turbo', '683026cbb448f.jpg', 450000000, 1, 1),
-(9, 'CB150X', 'Motor', 'Honda', 'Sport Touring', 2022, 'Motor touring tangguh dan nyaman', '6830267203f62.jpg', 32000000, 1, 1),
-(10, 'Ertiga Hybrid', 'Mobil', 'Suzuki', 'MPV', 2023, 'Mobil MPV hybrid ramah lingkungan', '6830268acad6b.jpg', 280000000, 1, 1),
-(11, 'Aerox 155', 'Motor', 'Yamaha', 'Skuter Sport', 2021, 'Skuter sport untuk anak muda', '6830264f93bec.jpg', 24500000, 1, 1),
-(12, 'CR-V Turbo', 'Mobil', 'Honda', 'SUV', 2023, 'SUV premium turbocharged', '683026832fb3c.jpg', 550000000, 1, 1),
-(13, 'Raize GR', 'Mobil', 'Toyota', 'SUV', 2022, 'SUV compact dengan desain stylish', '683024c5bdb92.jpg', 265000000, 1, 1),
-(15, 'XSR 155', 'Motor', 'Yamaha', 'Cafe Racer', 2022, 'Gaya retro dengan mesin modern', '683026c0e969c.jpg', 36500000, 1, 1),
-(16, 'Innova Zenix', 'Mobil', 'Toyota', 'MPV Hybrid', 2023, 'MPV hybrid terbaru dari Toyota', '6830269c6ca5d.jpg', 460000000, 1, 1),
-(17, 'Civic RS', 'Mobil', 'Honda', 'Sedan Sport', 2023, 'Sedan premium dan sporty', '68302679ebf0d.jpg', 600000000, 1, 1),
-(18, 'Scoopy', 'Motor', 'Honda', 'Skuter Retro', 2022, 'Motor retro stylish dan irit', '683024dc8bcf6.jpg', 22500000, 1, 1),
-(19, 'XL7 Alpha', 'Mobil', 'Suzuki', 'SUV', 2021, 'SUV stylish dan tangguh', '683026ab67721.jpg', 305000000, 1, 1),
-(21, 'Seal', 'Mobil', 'BYD', 'EV', 2024, 'Mobil Listrik ramah lingkungan', '6830106d1a9d0.jpg', 650000000, 1, 1),
-(22, 'GT3 RS', 'Mobil', 'Porsche', 'Sport', 2024, 'Kenceng', '68306de66386e.jpg', 500000000, 1, 2);
+INSERT INTO `kendaraan` (`id`, `nama`, `kategori`, `merek`, `tipe`, `tahun`, `deskripsi`, `gambar`, `harga`, `bukti_transfer`, `status`, `user_id`) VALUES
+(1, 'Avanza G', 'Mobil', 'Toyota', 'MPV', 2021, 'Mobil keluarga irit dan nyaman', '6830265731207.jpg', 210000000, NULL, 1, 2),
+(2, 'Beat Street', 'Motor', 'Honda', 'Skuter', 2022, 'Motor matic irit BBM dan lincah', '6830265fd05ca.jpg', 17000000, NULL, 1, 1),
+(3, 'Vario 160', 'Motor', 'Honda', 'Skuter', 2023, 'Desain sporty dan bertenaga', '683025034e589.jpg', 26500000, NULL, 1, 1),
+(4, 'Xpander Cross Ultimate', 'Mobil', 'Mitsubishi', 'SUV', 2022, 'SUV keluarga tangguh dan nyaman', '683026b6b82e5.jpg', 310000000, NULL, 1, 1),
+(5, 'Fortuner VRZ', 'Mobil', 'Toyota', 'SUV', 2023, 'SUV premium dengan fitur lengkap', '68302692ada1f.jpg', 590000000, NULL, 1, 1),
+(6, 'Brio Satya', 'Mobil', 'Honda', 'Hatchback', 2021, 'Mobil kecil irit dan cocok di perkotaan', '6830266808e3f.jpg', 165000000, NULL, 1, 1),
+(7, 'Ninja 250', 'Motor', 'Kawasaki', 'Sport', 2022, 'Motor sport dengan performa tinggi', '683024d290b0a.jpg', 69000000, NULL, 1, 1),
+(8, 'Yaris GR', 'Mobil', 'Toyota', 'Hatchback', 2023, 'Mobil sporty dengan mesin turbo', '683026cbb448f.jpg', 450000000, NULL, 1, 1),
+(9, 'CB150X', 'Motor', 'Honda', 'Sport Touring', 2022, 'Motor touring tangguh dan nyaman', '6830267203f62.jpg', 32000000, NULL, 1, 1),
+(10, 'Ertiga Hybrid', 'Mobil', 'Suzuki', 'MPV', 2023, 'Mobil MPV hybrid ramah lingkungan', '6830268acad6b.jpg', 280000000, NULL, 1, 1),
+(11, 'Aerox 155', 'Motor', 'Yamaha', 'Skuter Sport', 2021, 'Skuter sport untuk anak muda', '6830264f93bec.jpg', 24500000, NULL, 1, 1),
+(12, 'CR-V Turbo', 'Mobil', 'Honda', 'SUV', 2023, 'SUV premium turbocharged', '683026832fb3c.jpg', 550000000, NULL, 1, 1),
+(13, 'Raize GR', 'Mobil', 'Toyota', 'SUV', 2022, 'SUV compact dengan desain stylish', '683024c5bdb92.jpg', 265000000, NULL, 1, 1),
+(15, 'XSR 155', 'Motor', 'Yamaha', 'Cafe Racer', 2022, 'Gaya retro dengan mesin modern', '683026c0e969c.jpg', 36500000, NULL, 1, 1),
+(16, 'Innova Zenix', 'Mobil', 'Toyota', 'MPV Hybrid', 2023, 'MPV hybrid terbaru dari Toyota', '6830269c6ca5d.jpg', 460000000, NULL, 1, 1),
+(17, 'Civic RS', 'Mobil', 'Honda', 'Sedan Sport', 2023, 'Sedan premium dan sporty', '68302679ebf0d.jpg', 600000000, NULL, 1, 1),
+(18, 'Scoopy', 'Motor', 'Honda', 'Skuter Retro', 2022, 'Motor retro stylish dan irit', '683024dc8bcf6.jpg', 22500000, NULL, 3, 1),
+(19, 'XL7 Alpha', 'Mobil', 'Suzuki', 'SUV', 2021, 'SUV stylish dan tangguh', '683026ab67721.jpg', 305000000, NULL, 3, 1),
+(21, 'Seal', 'Mobil', 'BYD', 'EV', 2024, 'Mobil Listrik ramah lingkungan', '6830106d1a9d0.jpg', 650000000, NULL, 1, 1),
+(22, 'GT3 RS', 'Mobil', 'Porsche', 'Sport', 2024, 'Kenceng', '68306de66386e.jpg', 500000000, NULL, 1, 2),
+(24, 'Mio GJ', 'Motor', 'Yamaha', 'Skuter', 2010, 'Mio karbu               Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quos eaque dolorem natus tenetur! Perferendis inventore eveniet blanditiis unde assumenda qui aliquam suscipit voluptate recusandae ducimus. Ratione illo iusto non, sit eveniet unde ipsum consequuntur deleniti possimus? Nisi sequi, eligendi deserunt maiores velit esse veritatis reprehenderit enim voluptatem iure et.\r\n', '684aec2b5834c.jpeg', 2500000, '684aae35805f9_bukti.png', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -76,6 +78,7 @@ INSERT INTO `kendaraan` (`id`, `nama`, `kategori`, `merek`, `tipe`, `tahun`, `de
 CREATE TABLE `user` (
   `id` int NOT NULL,
   `nama` varchar(100) NOT NULL,
+  `role` int NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `no_telepon` varchar(20) DEFAULT NULL
@@ -85,11 +88,12 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nama`, `email`, `password`, `no_telepon`) VALUES
-(1, 'Lovianno', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '085335599874'),
-(2, 'naufal', 'mitra@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '085974174541'),
-(3, 'Andrean', 'andre@gmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '082132642548'),
-(4, 'Feri', 'feri@gmail.com', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', '0874658447569');
+INSERT INTO `user` (`id`, `nama`, `role`, `email`, `password`, `no_telepon`) VALUES
+(1, 'Lovianno', 2, 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '085335599874'),
+(2, 'naufal', 2, 'mitra@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '085974174541'),
+(3, 'Andrean', 2, 'andre@gmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '082132642548'),
+(4, 'Feri', 2, 'feri@gmail.com', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', '0874658447569'),
+(5, 'Raja Admin', 1, 'superadmin@gmail.com', '186cf774c97b60a1c106ef718d10970a6a06e06bef89553d9ae65d938a886eae', '085335599531');
 
 --
 -- Indexes for dumped tables
@@ -116,13 +120,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `kendaraan`
 --
 ALTER TABLE `kendaraan`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

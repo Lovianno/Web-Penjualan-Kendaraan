@@ -17,7 +17,7 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $perPage;
 
 // Ambil data Kendaraan berdasarkan filter
-$kendaraan = getKendaraanFiltered($kategori, $search, $perPage, $offset, 0);
+$kendaraan = getKendaraanFiltered($kategori, $search, $perPage, $offset, 0, 1);
 $totalData = countKendaraanFiltered($kategori, $search, 0);
 $totalPages = ceil($totalData / $perPage);
 
@@ -52,7 +52,8 @@ $totalPages = ceil($totalData / $perPage);
           <a class="nav-link text-racing" href="index.php#about">About Us</a>
           <a class="nav-link text-racing" href="index.php#contact">Contact Us</a>
           <?php if (isset($_SESSION['user'])): ?>
-            <a class="nav-link" href="admin/kendaraan.php">Master Kendaraan</a>
+                       <a class="nav-link" href="admin/kendaraan.php">Master Kendaraan</a>
+
           <?php endif; ?>
         </div>
       </div>

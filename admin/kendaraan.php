@@ -8,6 +8,8 @@ if (!isset($_SESSION['user'])) {
 // Ambil data user dari login
 $namaUser = $_SESSION['user']['nama'];
 $user_id = $_SESSION['user']['id'];
+$role = $_SESSION['user']['role'];
+
 
 // Ambil data dari input GET
 $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : '';
@@ -20,10 +22,11 @@ $perPage = 10; // jumlah data per halaman
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($page - 1) * $perPage;
 
-$kendaraan = getKendaraanFiltered($kategori, $search, $perPage, $offset, $user_id);
+$userFilterId = ($role == 1) ? 0 : $user_id;
 
-// >>>> Tambahkan di sini untuk Langkah 3 (Hitung total data dan halaman)
-$totalData = countKendaraanFiltered($kategori,$search, $user_id);
+$kendaraan = getKendaraanFiltered($kategori, $search, $perPage, $offset, $userFilterId);
+$totalData = countKendaraanFiltered($kategori, $search, $userFilterId);
+
 $totalPages = ceil($totalData / $perPage);
 
 
@@ -59,6 +62,10 @@ $totalPages = ceil($totalData / $perPage);
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                     <li><a class="dropdown-item " href="../index.php">Home</a></li>
+                    <?php if($role == 1){ ?>
+                    <li><a class="dropdown-item " href="konfirmasiPostingan.php">Konfirmasi Postingan</a></li>
+                    <?php }; ?>
+
                     <li><a class="dropdown-item " href="../catalog.php">Katalog Kendaraan</a></li>
                     <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
                 </ul>
@@ -130,38 +137,57 @@ $totalPages = ceil($totalData / $perPage);
                       <td><?= $item['tipe'] ?></td>
                       <td><?= $item['tahun'] ?></td>
                       <td>Rp <?= number_format($item['harga'], 0, ',', '.') ?></td>
-                      <td>
-                        <span class="badge bg-<?= $item['status'] == '1' ? 'success' : 'secondary' ?>">
-                          <?= $item['status'] == '1' ? 'Aktif' : 'Nonaktif' ?>
-                        </span>
-                      </td>
+                     <td>
+  <?php
+    $statusLabels = [
+      0 => ['label' => 'Menunggu Konfirmasi', 'badge' => 'warning'],
+      1 => ['label' => 'Aktif', 'badge' => 'success'],
+      2 => ['label' => 'Nonaktif', 'badge' => 'secondary'],
+      3 => ['label' => 'Ditolak', 'badge' => 'danger'],
+     
+    ];
+
+    $status = (int)$item['status'];
+    $label = $statusLabels[$status]['label'] ?? 'Tidak Diketahui';
+    $badge = $statusLabels[$status]['badge'] ?? 'dark';
+  ?>
+  <span class="badge bg-<?= $badge ?>"><?= $label ?></span>
+</td>
                       <td class="text-center">
                         <a href="detailKendaraan.php?id=<?= $item['id'] ?>" class="btn btn-info btn-sm mb-1">
                           <i class="bi bi-info-circle"></i> Info
                         </a>
+                        <?php if($role != 1){?>
+
+                          <?php if($item['status'] != 3){?>
                         <a href="editKendaraan.php?id=<?= $item['id'] ?>" class="btn btn-warning btn-sm mb-1">
                           <i class="bi bi-pencil-square"></i> Ubah
                         </a>
-                        <a href="hapusKendaraan.php?id=<?= $item['id'] ?>" class="btn btn-danger btn-sm mb-1" onclick="return confirm('Yakin ingin menghapus kendaraan ini?')">
-                          <i class="bi bi-trash"></i> Hapus
-                        </a>
+                          
+                          <a href="hapusKendaraan.php?id=<?= $item['id'] ?>" class="btn btn-danger btn-sm mb-1" onclick="return confirm('Yakin ingin menghapus kendaraan ini?')">
+                            <i class="bi bi-trash"></i> Hapus
+                          </a>
+                            <?php }?>
+
+                          <?php }?>
+
                       </td>
                     </tr>
                   <?php endforeach ?>
                 </tbody>
               </table>
               <nav>
-  <ul class="pagination justify-content-center mt-4">
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-      <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-        <a class="page-link"
-           href="?page=<?= $i ?>&kategori=<?= urlencode($kategori) ?>&search=<?= urlencode($search) ?>">
-          <?= $i ?>
-        </a>
-      </li>
-    <?php endfor; ?>
-  </ul>
-</nav>
+              <ul class="pagination justify-content-center mt-4">
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                  <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                    <a class="page-link"
+                      href="?page=<?= $i ?>&kategori=<?= urlencode($kategori) ?>&search=<?= urlencode($search) ?>">
+                      <?= $i ?>
+                    </a>
+                  </li>
+                <?php endfor; ?>
+              </ul>
+               </nav>
 
             </div>
           </div>
